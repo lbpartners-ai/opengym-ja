@@ -62,8 +62,11 @@ export function effectiveLang(S, config, navLangs = browserLangs()) {
   let cfg = config
   if (!cfg) {
     const seen = cachedDefaultLang()
-    if (seen === null) return own
-    cfg = { default_lang: seen }
+    // A build with no server (the browser-only GRAN LUSSO build) never gets a config: its
+    // VITE_DEFAULT_LANG stands in for the instance's DEFAULT_LANG.
+    const built = (import.meta.env || {}).VITE_DEFAULT_LANG
+    if (seen === null && !built) return own
+    cfg = { default_lang: seen || built }
   }
   return autoLang(S, cfg, navLangs) || own
 }

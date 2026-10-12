@@ -21,7 +21,7 @@ import { pushSupported, enablePush, disablePush, sendTestPush, syncPushSubscript
 import { wakeLockSupported } from '../lib/wakelock.js'
 import { t, tn, LANGS, INSTR_LANGS, EXERCISE_NAME_LANGS, baseLang, dateLocale } from '../lib/i18n.js'
 import { effectiveLang } from '../lib/default-lang.js'
-import { DEMO, REPO } from '../lib/demo.js'
+import { DEMO, NOSEED, REPO } from '../lib/demo.js'
 import { MOBILE, isAndroid, shareExport, shareExportBlob, syncReminder } from '../lib/mobile.js'
 import { NUDGE_COPY, NUDGE_TONES, toneOf } from '../lib/nudge.js'
 import { referencedFiles } from '../lib/media-refs.js'
@@ -858,8 +858,8 @@ export default function Settings({ page = null, find = null, via = null }) {
           <KeptChangesRows />
         </> : DEMO ? <>
           <Row icon="info" iconTint="var(--acc)" title={t('You’re in the demo')} subtitle={t('Example data, stored only in this browser. Go wild and change anything you like.')} />
-          <Row icon="reset" iconTint="var(--blue)" title={t('Reset demo data')} accessory="chevron"
-            onClick={() => confirmSheet({ title: t('Reset demo data?'), message: t('Puts the example plan, workouts and weigh-ins back the way they started.'), confirmText: t('Reset'), onConfirm: () => { resetDemo(); nav('/home'); toast(t('Demo data reset')) } })} />
+          {!NOSEED && <Row icon="reset" iconTint="var(--blue)" title={t('Reset demo data')} accessory="chevron"
+            onClick={() => confirmSheet({ title: t('Reset demo data?'), message: t('Puts the example plan, workouts and weigh-ins back the way they started.'), confirmText: t('Reset'), onConfirm: () => { resetDemo(); nav('/home'); toast(t('Demo data reset')) } })} />}
           <Row icon="rocket" iconTint="var(--indigo)" title={t('Self-host openGym')} subtitle={t('Passkey sign-in, sync across your devices, your own data.')} accessory="chevron"
             onClick={() => window.open(REPO, '_blank', 'noopener')} />
         </> : user ? <>

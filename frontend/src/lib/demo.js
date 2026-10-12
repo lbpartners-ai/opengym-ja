@@ -11,4 +11,7 @@
 // lands in a self-hosted bundle.
 export const DEMO = import.meta.env.VITE_DEMO === '1'
 export const DEMO_SEEDED = 'gym_demo_seeded_v1'
-export const REPO = 'https://gitlab.com/DuarteSantos8/opengym'
+// GRAN LUSSO build (VITE_NOSEED=1): the same browser-only app, but it starts empty instead of on
+// the example history, and has no "reset demo data" row. REPO points at this fork's source (AGPL).
+export const NOSEED = import.meta.env.VITE_NOSEED === '1'
+export const REPO = import.meta.env.VITE_REPO || 'https://gitlab.com/DuarteSantos8/opengym'
